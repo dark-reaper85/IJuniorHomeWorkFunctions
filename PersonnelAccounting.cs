@@ -57,7 +57,17 @@ namespace IJuniorHomeWorkFunctions
                     case "3":
                         Console.WriteLine("Введите номер удаляемого досье");
                         int deletingFileNumber = Convert.ToInt32(Console.ReadLine());
-                        DeleteFile(ref workers, ref posts, deletingFileNumber);
+
+                        if (deletingFileNumber > 0 && deletingFileNumber <= workers.Length)
+                        {
+                            DeleteFile(ref workers, deletingFileNumber);
+                            DeleteFile(ref posts, deletingFileNumber);
+                            Console.WriteLine($"Досье №{deletingFileNumber} удалено");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Досье с таким номером отсутствует");
+                        }
                         Console.ReadKey();
                         break;
                     case "4":
@@ -109,30 +119,20 @@ namespace IJuniorHomeWorkFunctions
             }
         }
 
-        static void DeleteFile(ref string[] names, ref string[] posts, int fileNumber) 
+        static void DeleteFile(ref string[] names, int fileNumber) 
         {
-            if (fileNumber > 0 && fileNumber <= names.Length)
+            string[] tempArray = new string[names.Length - 1];
+                
+            for (int i = 0; i < fileNumber - 1; i++)
             {
-                string[] tempArray1 = new string[names.Length - 1];
-                string[] tempArray2 = new string[posts.Length - 1];
-                for (int i = 0; i < fileNumber - 1; i++)
-                {
-                    tempArray1[i] = names[i];
-                    tempArray2[i] = names[i];
-                }
-                for (int i = fileNumber; i < names.Length; i++)
-                {
-                    tempArray1[i - 1] = names[i];
-                    tempArray2[i - 1] = posts[i];
-                }
-                names = tempArray1;
-                posts = tempArray2;
-                Console.WriteLine($"Досье №{fileNumber} удалено");
+                tempArray[i] = names[i];
             }
-            else 
+            for (int i = fileNumber; i < names.Length; i++)
             {
-                Console.WriteLine("Досье с таким номером отсутствует");
+                tempArray[i - 1] = names[i];
             }
+
+            names = tempArray;
         }
     }
 }

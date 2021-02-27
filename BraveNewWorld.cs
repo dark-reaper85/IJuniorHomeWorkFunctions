@@ -140,15 +140,9 @@ namespace BraveNewWorld
                         switch (rand.Next(1,5))
                         {
                             case 1:
-                                array[i, j] = ' ';
-                                break;
-                            case 2:
                                 array[i, j] = '#';
                                 break;
-                            case 3:
-                                array[i, j] = ' ';
-                                break;
-                            case 4:
+                            default:
                                 array[i, j] = ' ';
                                 break;
                         }

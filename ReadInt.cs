@@ -16,12 +16,14 @@ namespace ReadInt
 
         static int ReadIntInput(string userInput)
         {
-            int value;
+            int value = 0;
+            bool isParsing = false;
 
-            while (int.TryParse(userInput, out value) == false)
+            while ( isParsing == false)
             {
                 Console.WriteLine("Введите число");
                 userInput = Console.ReadLine();
+                isParsing = int.TryParse(userInput, out value);
             }
 
             return value;
